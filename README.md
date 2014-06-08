@@ -32,8 +32,8 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    files: {
+      // Target SQL files to run
     },
   },
 });
@@ -41,46 +41,70 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.host
 Type: `String`
-Default value: `',  '`
+Default value: `'localhost'`
 
-A string value that is used to do something with whatever.
+The DB server host to connect to.
 
-#### options.punctuation
+#### options.port
 Type: `String`
-Default value: `'.'`
+Default value: `'5432'`
 
-A string value that is used to do something else with whatever else.
+the port of the target DB server.
+
+#### options.user (optional)
+Type: `String`
+Default value: `null`
+
+user name for authentication. for local deployment this can be omitted sometimes.
+
+#### options.password (optional)
+Type: `String`
+Default value: `null`
+
+password for authentication. for local deployment this can be omitted sometimes.
+
+#### options.database
+Type: `String`
+Default value: `'postgres'`
+
+the specific database to run files against.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  pg_deploy: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Using Default Options
+In this example, the default options are used to do local deployments:
 
 ```js
 grunt.initConfig({
   pg_deploy: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      user: 'user1',
+      password: 'hello'
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      tables: ['tables/users/*.sql', 'tables/products/*.sql'],
+    },
+  },
+});
+```
+
+#### Fully Customized Options
+In this example, we're using all the options avaliable to run tasks
+
+```js
+grunt.initConfig({
+  pg_deploy: {
+    options: {
+      host: 'my.db-server.com',
+      port: 4321,
+      user: 'admin',
+      password: 'greetings',
+      database: 'shop_db'
+    },
+    files: {
+      tables: ['tables/users/*.sql', 'tables/products/*.sql'],
     },
   },
 });
