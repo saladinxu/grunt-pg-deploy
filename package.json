@@ -1,7 +1,7 @@
 {
   "name": "grunt-pg-deploy",
   "description": "plugin for deploy SQL files onto postgres DBs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/saladinxu/grunt-pg-deploy",
   "author": {
     "name": "saladinxu",
