@@ -36,6 +36,8 @@
     "grunt": "~0.4.5"
   },
   "keywords": [
-    "gruntplugin"
+    "grunt",
+    "plugin",
+    "postgres"
   ]
 }

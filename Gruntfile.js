@@ -23,27 +23,27 @@ module.exports = function(grunt) {
       }
     },
 
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['tmp']
-    },
-
     // Configuration to be run (and then tested).
     pg_deploy: {
-      default_options: {
+      development: {
         options: {
+          user : '<enter>',
+          password : '<enter>'
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+          src: 'test/fixtures/tables/*.sql'
         }
       },
-      custom_options: {
+      production: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
+          host     : "<enter>",
+          port     : "<enter>",
+          database : "<enter>",
+          user     : "<enter>",
+          password : "<enter>"
         },
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          src: 'test/fixtures/tables/*.sql'
         }
       }
     },
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'pg_deploy', 'nodeunit']);
+  grunt.registerTask('test', ['pg_deploy', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
